@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Categories from "./Categories";
 import './Home.css';
+import { BASE_URL, LIKED_PRODUCTS_URL } from "../constants";
 
 function ProductCard({ item }) {
     const navigate = useNavigate();
@@ -14,7 +15,7 @@ function ProductCard({ item }) {
 
     return (
         <div className="product-card" onClick={openProduct} role="link" tabIndex="0">
-            <img className="product-image" src={`http://localhost:4000/${item.pimage}`} alt={item.pname} />
+            <img className="product-image" src={`${BASE_URL}/${item.pimage}`} alt={item.pname} />
             <div className="product-info">
                 <p className="product-name">{item.pname} <span>{item.category}</span></p>
                 <h3 className="product-price">{item.price}</h3>
@@ -38,7 +39,7 @@ function LikedProducts() {
         }
 
         const data = { userId: localStorage.getItem('userId') };
-        axios.post('http://localhost:4000/Liked-products', data)
+        axios.post(LIKED_PRODUCTS_URL, data)
             .then((res) => {
                 const result = res.data.products || [];
                 setProducts(result);

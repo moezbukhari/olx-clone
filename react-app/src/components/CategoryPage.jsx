@@ -6,6 +6,7 @@ import Categories from "./Categories";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import './Home.css';
 import { useParams } from "react-router-dom";
+import { BASE_URL, LIKE_PRODUCT_URL, PRODUCTS_URL, SEARCH_URL } from "../constants";
 
 function ProductCard({ item }) {
     const navigate = useNavigate();
@@ -21,7 +22,7 @@ function ProductCard({ item }) {
         const userId = localStorage.getItem('userId');
         console.log('user Id', userId, "productid",productId);
 const data ={ userId, productId};
-          axios.post('http://localhost:4000/like-product', data)
+          axios.post(LIKE_PRODUCT_URL, data)
             .then((res) => {
                 if (res.data.message) {
                     alert('Liked successfully');
@@ -46,7 +47,7 @@ const data ={ userId, productId};
             >
                 {isWishlisted ? <FaHeart /> : <FaRegHeart />}
             </button>
-            <img className="product-image" src={`http://localhost:4000/${item.pimage}`} alt={item.pname} />
+            <img className="product-image" src={`${BASE_URL}/${item.pimage}`} alt={item.pname} />
             <div className="product-info">
                 <p className="product-name">{item.pname} <span>{item.category}</span></p>
                 <h3 className="product-price">{item.price}</h3>
@@ -76,7 +77,7 @@ const param = useParams();
             return;
         }
 
-       axios.get('http://localhost:4000/get-products?catName='+param.catName)
+    axios.get(PRODUCTS_URL + '?catName=' + param.catName)
           .then((res) => {
                 const result = (res.data.products || []).filter((item) => (item.category || '').trim().toLowerCase() === (param.catName || '').trim().toLowerCase());
                 setProducts(result);
@@ -108,7 +109,7 @@ const param = useParams();
 
     const handleClick = () => {
        // filterProducts(search, category);
-const url = 'http://localhost:4000/search?search=' + search;
+const url = SEARCH_URL + '?search=' + search;
  axios.get(url)
             .then((res) => {
                 setProducts(res.data.products || []);

@@ -1,14 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 
+:root {
+  --ink: #102f35;
+  --ink-soft: #476168;
+  --navy: #073b43;
+  --navy-deep: #052e35;
+  --accent: #f27b45;
+  --accent-dark: #d9612e;
+  --paper: #f5f8f7;
+  --white: #ffffff;
+  --line: #dbe6e5;
+  --shadow: 0 18px 45px rgba(7, 59, 67, 0.1);
+}
+
 * {
   box-sizing: border-box;
 }
 
+html {
+  background: var(--paper);
+}
+
 body {
   margin: 0;
+  color: var(--ink);
+  background: var(--paper);
   font-family: 'DM Sans', sans-serif;
-  background: #f2f4f5;
-  color: #172f33;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -19,7 +36,20 @@ select {
   font: inherit;
 }
 
+button,
+a,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid rgba(242, 123, 69, 0.35);
+  outline-offset: 2px;
+}
+
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }

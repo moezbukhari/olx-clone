@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import Header from "./header";
 import '../App.css';
+import { BASE_URL, PRODUCT_URL, USER_URL } from "../constants";
 
 function ProductDetail() {
     const { id } = useParams();
@@ -10,7 +11,7 @@ function ProductDetail() {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        const url = `http://localhost:4000/product/${id}`;
+        const url = `${PRODUCT_URL}/${id}`;
         axios.get(url)
             .then((res) => {
                 setProduct(res.data.product);
@@ -21,7 +22,7 @@ function ProductDetail() {
     }, [id]);
     const handleContact = (addedBy) => {
 
-const url = `http://localhost:4000/get-user/${addedBy}`;
+const url = `${USER_URL}/${addedBy}`;
         axios.get(url)
             .then((res) => {
                 if(res.data.user) {
@@ -41,7 +42,7 @@ const url = `http://localhost:4000/get-user/${addedBy}`;
                 {!product && <p className="detail-status">Loading product...</p>}
                 {product && (
                     <>
-                        <img className="detail-image" src={`http://localhost:4000/${product.pimage}`} alt={product.pname} />
+                        <img className="detail-image" src={`${BASE_URL}/${product.pimage}`} alt={product.pname} />
                         <div className="detail-content">
                             <p className="detail-category">{product.category}</p>
                             <h1>{product.pname}</h1>

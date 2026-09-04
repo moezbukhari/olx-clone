@@ -5,6 +5,7 @@ import axios from "axios";
 import '../App.css';
 import categories from "./CategoriesList";
 import { locations } from "./header";
+import { ADD_PRODUCT_URL } from "../constants";
 
 function AddProduct() {
     const navigate = useNavigate();
@@ -37,9 +38,7 @@ function AddProduct() {
         formData.append('pimage2', pimage2);
         formData.append('location', location);
 
-        const URL = 'http://localhost:4000/add-product';
-
-        axios.post(URL, formData)
+        axios.post(ADD_PRODUCT_URL, formData)
             .then((res) => {
                 if (res.data.message) {
                     alert(res.data.message);

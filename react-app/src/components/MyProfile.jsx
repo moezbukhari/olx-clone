@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { USER_URL } from "../constants";
 
 function MyProfile() {
     const navigate = useNavigate();
@@ -14,7 +15,7 @@ function MyProfile() {
             return;
         }
 
-        axios.get(`http://localhost:4000/get-user/${localStorage.getItem('userId')}`)
+        axios.get(`${USER_URL}/${localStorage.getItem('userId')}`)
             .then((res) => {
                 setUser(res.data.user || {});
             })

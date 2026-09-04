@@ -173,7 +173,7 @@ function Header(props) {
                     // dikhega jo /add-product page par le jayega.
                     )}
                     {localStorage.getItem('token') && (
-                        <Link className='header-btn' to='/my-products'>MY PRODUCTS</Link>
+                        <Link className='header-btn' to='/my-products'>MY ADD</Link>
                     )}
                     {localStorage.getItem('token') && (
                         <Link className='header-btn' to='/my-profile'>MY PROFILE</Link>
@@ -193,7 +193,7 @@ function Header(props) {
                     // wala handleLogout function chalega.
                     )}
                     {localStorage.getItem('token') && (
-                        <Link className='header-btn' to='/liked-products'>LIKED PRODUCTS</Link>
+                        <Link className='header-btn' to='/liked-products'>FAVORITES</Link>
                     )}
                 </div>}
                 

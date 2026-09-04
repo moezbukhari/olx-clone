@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import '../App.css';
+import { SIGNUP_URL } from "../constants";
 
 function Signup() {
 const navigate = useNavigate();
@@ -15,9 +16,8 @@ const [ gmail,setgmail] = useState('');
  
 
 const handleApi = () => {
-    const url = 'http://localhost:4000/signup';
     const data = { username, password, contact, gmail };
-    axios.post(url, data)
+    axios.post(SIGNUP_URL, data)
         .then((res) => {
             if (res.data.message) {
                 alert(res.data.message);

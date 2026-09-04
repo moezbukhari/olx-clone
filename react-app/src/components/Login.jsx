@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import '../App.css';
+import { LOGIN_URL } from "../constants";
 
 function Login() {
     const navigate=useNavigate();
@@ -12,9 +13,8 @@ const [ username,setusername] = useState('');
 const [ password,setpassword] = useState('');
 
 const handleApi = () => {
-    const url = 'http://localhost:4000/login';
     const data = { username, password };
-    axios.post(url, data)
+    axios.post(LOGIN_URL, data)
         .then((res) => {
             if (res.data.message) {
                 alert(res.data.message);

@@ -1,0 +1,151 @@
+.home-shell {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f2f4f5 0%, #eaf0f0 100%);
+}
+
+.results-wrapper {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 34px clamp(20px, 4vw, 56px) 56px;
+}
+
+.results-title {
+  margin: 0 0 22px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #002f34;
+  text-transform: uppercase;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.product-card {
+  position: relative;
+  min-width: 0;
+  background: #ffffff;
+  border: 1px solid #dce4e5;
+  border-radius: 7px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0, 47, 52, 0.07);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 47, 52, 0.14);
+}
+
+.product-image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  background: #dfe8e8;
+}
+
+.product-info {
+  padding: 15px 16px 18px;
+}
+
+.product-name {
+  margin: 0 0 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #002f34;
+  line-height: 1.4;
+}
+
+.product-name span {
+  font-weight: 500;
+  color: #6c8183;
+  font-size: 12px;
+}
+
+.product-price {
+  margin: 0 0 6px;
+  color: #002f34;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.product-desc {
+  margin: 0;
+  font-size: 12px;
+  color: #607477;
+  line-height: 1.5;
+}
+
+.icon-con {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wishlist-button {
+  z-index: 1;
+  padding: 0;
+  border: 0;
+  color: #52686a;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.wishlist-button:hover {
+  color: #e63946;
+  transform: scale(1.08);
+}
+
+.wishlist-button.is-wishlisted {
+  color: #e63946;
+  animation: wishlist-pop 0.25s ease;
+}
+
+.wishlist-button svg {
+  font-size: 22px;
+}
+
+@keyframes wishlist-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.no-products {
+  font-size: 16px;
+  color: #607477;
+  margin-top: 10px;
+}
+
+@media (max-width: 1050px) {
+  .product-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+}
+
+@media (max-width: 460px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+}

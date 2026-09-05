@@ -8,7 +8,7 @@ const productController = require('./controllers/productController');
 const userController = require('./controllers/userController');
 
 const app = express();
-const port = 4000;
+const port = process.env.PORT || 4000;
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, 'uploads'),

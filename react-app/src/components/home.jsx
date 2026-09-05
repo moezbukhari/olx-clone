@@ -133,7 +133,7 @@ const url = SEARCH_URL + '?search=' + encodeURIComponent(search) + '&location=' 
     };
 
     return (
-     <>  {!issearch &&  <div className="home-shell">
+    <>  <div className="home-shell">
             <Header search={search} location={location} handlesearch={handleSearch} handleclick={handleClick} handleLocationChange={handleLocationChange} />
             <Categories handlecategory={handleCategory} />
             {issearch && cproducts && <h5>SEARCH RESULTS</h5>}
@@ -158,7 +158,7 @@ const url = SEARCH_URL + '?search=' + encodeURIComponent(search) + '&location=' 
                     )}
                 </div>
             </div>
-        </div>}
+        </div>
         </>
     );
 }

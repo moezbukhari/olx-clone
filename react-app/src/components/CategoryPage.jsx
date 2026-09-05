@@ -6,11 +6,11 @@ import Categories from "./Categories";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import './Home.css';
 import { useParams } from "react-router-dom";
-import { BASE_URL, LIKE_PRODUCT_URL, PRODUCTS_URL, SEARCH_URL } from "../constants";
+import { BASE_URL, LIKE_PRODUCT_URL, LIKED_PRODUCTS_URL, PRODUCTS_URL, SEARCH_URL } from "../constants";
 
 function ProductCard({ item }) {
     const navigate = useNavigate();
-    const [isWishlisted, setIsWishlisted] = useState(false);
+    const [isWishlisted, setIsWishlisted] = useState(item.isLiked || false);
 
     const openProduct = () => {
         console.log('ProductCard _id:', item._id);
@@ -20,13 +20,10 @@ function ProductCard({ item }) {
 
     const handlelike = (productId) =>{
         const userId = localStorage.getItem('userId');
-        console.log('user Id', userId, "productid",productId);
-const data ={ userId, productId};
-          axios.post(LIKE_PRODUCT_URL, data)
+        const data ={ userId, productId};
+        axios.post(LIKE_PRODUCT_URL, data)
             .then((res) => {
-                if (res.data.message) {
-                    alert('Liked successfully');
-                }
+                setIsWishlisted(res.data.liked);
             })
             .catch(() => {
                 alert('server error');
@@ -40,8 +37,8 @@ const data ={ userId, productId};
                 className={`icon-con wishlist-button ${isWishlisted ? 'is-wishlisted' : ''}`}
                 onClick={(event) => {
                     event.stopPropagation();
+                    setIsWishlisted((current) => !current);
                     handlelike(item._id);
-                    setIsWishlisted(true);
                 }}
                 aria-label={isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
             >
@@ -77,15 +74,22 @@ const param = useParams();
             return;
         }
 
-    axios.get(PRODUCTS_URL + '?catName=' + param.catName)
-          .then((res) => {
-                const result = (res.data.products || []).filter((item) => (item.category || '').trim().toLowerCase() === (param.catName || '').trim().toLowerCase());
+    Promise.all([
+        axios.get(PRODUCTS_URL + '?catName=' + param.catName),
+        axios.post(LIKED_PRODUCTS_URL, { userId: localStorage.getItem('userId') })
+    ])
+          .then(([productsRes, likedRes]) => {
+                const likedIds = (likedRes.data.products || []).map((item) => item._id);
+                const result = (productsRes.data.products || [])
+                    .filter((item) => (item.category || '').trim().toLowerCase() === (param.catName || '').trim().toLowerCase())
+                    .map((item) => ({ ...item, isLiked: likedIds.includes(item._id) }));
                 setProducts(result);
                 setFilteredProducts(result);
             })
             .catch(() => {
                 alert('server error');
             });
+
     }, [param.catName, navigate]);
 
     const filterProducts = (searchValue, selectedCategory) => {

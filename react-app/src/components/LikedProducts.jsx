@@ -39,9 +39,11 @@ function LikedProducts() {
         }
 
         const data = { userId: localStorage.getItem('userId') };
+        console.log('[Favorites] fetching liked products', data);
         axios.post(LIKED_PRODUCTS_URL, data)
             .then((res) => {
                 const result = res.data.products || [];
+            console.log('[Favorites] received liked products', result.map((item) => item._id));
                 setProducts(result);
                 setFilteredProducts(result);
             })

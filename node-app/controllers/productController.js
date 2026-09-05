@@ -52,12 +52,16 @@ module.exports.likeProduct = (req, res) => {
       }
 
       const isLiked = (user.LikedProducts || []).some((id) => id.toString() === productId);
+      console.log('[like-product] before', { productId, userId, isLiked, likedProducts: user.LikedProducts });
       const update = isLiked
         ? { $pull: { LikedProducts: productId } }
         : { $addToSet: { LikedProducts: productId } };
 
       return Users.updateOne({ _id: userId }, update)
-        .then(() => res.send({ message: isLiked ? 'Product unliked successfully.' : 'Product liked successfully.', liked: !isLiked }));
+        .then((result) => Users.findById(userId).then((updatedUser) => {
+          console.log('[like-product] after', { operation: isLiked ? '$pull' : '$addToSet', result, likedProducts: updatedUser.LikedProducts });
+          res.send({ message: isLiked ? 'Product unliked successfully.' : 'Product liked successfully.', liked: !isLiked });
+        }));
     })
     .catch((err) => res.send({ message: 'Error updating product like.', error: err }));
 };

@@ -1,5 +1,5 @@
 
-export const BASE_URL = 'http://localhost:4000';
+export const BASE_URL = 'https://olx-clone-o02c.onrender.com';
 
 export const SIGNUP_URL = BASE_URL + '/signup';
 export const LOGIN_URL = BASE_URL + '/login';

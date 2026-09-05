@@ -130,7 +130,7 @@ const url = SEARCH_URL + '?search=' + search;
             <Header search={search} handlesearch={handleSearch} handleclick={handleClick} />
             <Categories handlecategory={handleCategory} />
             {issearch && cproducts && <h5>SEARCH RESULTS</h5>}
-            {issearch && cproducts && cproducts.length == 0 && <h5>NO RESULTS FOUND</h5>}
+            {issearch && cproducts && cproducts.length === 0 && <h5>NO RESULTS FOUND</h5>}
             <div className="results-wrapper">
                 <h5 className="results-title">SEARCH RESULTS</h5>
                 <button onClick={() => {

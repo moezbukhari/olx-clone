@@ -9,13 +9,12 @@ import { ADD_PRODUCT_URL } from "../constants";
 
 function AddProduct() {
     const navigate = useNavigate();
-    const [position, setPosition] = useState({ latitude: null, longitude: null });
+    const [position] = useState({ latitude: null, longitude: null });
     const [pname, setPname] = useState('');
     const [price, setPrice] = useState('');
     const [pdesc, setPdesc] = useState('');
     const [category, setCategory] = useState('');
     const [pimage, setPimage] = useState('');
-    const [userId, setUserId] = useState('');
     const [pimage2, setPimage2] = useState('');
     const [location, setLocation] = useState('');
 

@@ -1,5 +1,7 @@
 
-export const BASE_URL = 'https://olx-clone-o02c.onrender.com';
+export const BASE_URL = process.env.NODE_ENV === 'development'
+	? 'http://localhost:4000'
+	: 'https://olx-clone-o02c.onrender.com';
 
 export const SIGNUP_URL = BASE_URL + '/signup';
 export const LOGIN_URL = BASE_URL + '/login';

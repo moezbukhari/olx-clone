@@ -15,7 +15,7 @@ function ProductCard({ item }) {
 
     return (
         <div className="product-card" onClick={openProduct} role="link" tabIndex="0">
-            <img className="product-image" src={`${BASE_URL}/${item.pimage}`} alt={item.pname} />
+            <img loading="lazy" className="product-image" src={`${BASE_URL}/${item.pimage}`} alt={item.pname} />
             <div className="product-info">
                 <p className="product-name">{item.pname} <span>{item.category}</span></p>
                 <h3 className="product-price">{item.price}</h3>
@@ -39,11 +39,9 @@ function LikedProducts() {
         }
 
         const data = { userId: localStorage.getItem('userId') };
-        console.log('[Favorites] fetching liked products', data);
         axios.post(LIKED_PRODUCTS_URL, data)
             .then((res) => {
                 const result = res.data.products || [];
-            console.log('[Favorites] received liked products', result.map((item) => item._id));
                 setProducts(result);
                 setFilteredProducts(result);
             })

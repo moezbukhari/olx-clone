@@ -15,7 +15,7 @@ function ProductCard({ item, onDelete }) {
 
     return (
         <div className="product-card" onClick={openProduct} role="link" tabIndex="0">
-            <img className="product-image" src={`${BASE_URL}/${item.pimage}`} alt={item.pname} />
+            <img loading="lazy" className="product-image" src={`${BASE_URL}/${item.pimage}`} alt={item.pname} />
             <div className="product-info">
                 <p className="product-name">{item.pname} <span>{item.category}</span></p>
                 <h3 className="product-price">{item.price}</h3>

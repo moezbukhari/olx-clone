@@ -11,11 +11,7 @@ import { BASE_URL, LIKE_PRODUCT_URL, LIKED_PRODUCTS_URL, PRODUCTS_URL, SEARCH_UR
 function ProductCard({ item }) {
     const navigate = useNavigate();
     const [isWishlisted, setIsWishlisted] = useState(item.isLiked || false);
-    console.log('[Category ProductCard] heart state', { productId: item._id, isWishlisted, itemIsLiked: item.isLiked });
-
     const openProduct = () => {
-        console.log('ProductCard _id:', item._id);
-        console.log('Product detail URL:', `/product/${item._id}`);
         navigate(`/product/${item._id}`);
     };
 
@@ -45,7 +41,7 @@ function ProductCard({ item }) {
             >
                 {isWishlisted ? <FaHeart /> : <FaRegHeart />}
             </button>
-            <img className="product-image" src={`${BASE_URL}/${item.pimage}`} alt={item.pname} />
+            <img loading="lazy" className="product-image" src={`${BASE_URL}/${item.pimage}`} alt={item.pname} />
             <div className="product-info">
                 <p className="product-name">{item.pname} <span>{item.category}</span></p>
                 <h3 className="product-price">{item.price}</h3>

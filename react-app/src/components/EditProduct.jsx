@@ -78,7 +78,7 @@ function EditProduct() {
                 </label>
                 <label className="form-field">
                     Current image
-                    <img loading="lazy" className="edit-image-preview" src={`${BASE_URL}/${product.pimage}`} alt={product.pname} />
+                    <img loading="lazy" className="edit-image-preview" src={product.pimage.startsWith('http') ? product.pimage : `${BASE_URL}/${product.pimage}`} alt={product.pname} />
                     Replace image
                     <input type="file" onChange={(e) => setPimage(e.target.files[0])} />
                 </label>

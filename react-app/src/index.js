@@ -29,6 +29,8 @@ import MyProducts from './components/MyProducts';
 import MyProfile from './components/MyProfile';
 import CategoryPage from './components/CategoryPage';
 import EditProduct from './components/EditProduct';
+import ChatList from './components/ChatList';
+import Chat from './components/Chat';
 
 const router = createBrowserRouter([
   {
@@ -71,6 +73,14 @@ const router = createBrowserRouter([
   {
     path: "/edit-product/:id",
     element: (<EditProduct/>),
+  },
+  {
+    path: "/chats",
+    element: (<ChatList/>),
+  },
+  {
+    path: "/chat/:otherUserId",
+    element: (<Chat/>),
   },
   {
     path: "/my-profile",

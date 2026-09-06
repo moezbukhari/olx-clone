@@ -1,4 +1,5 @@
 const express = require('express');
+const http = require('http');
 const multer = require('multer');
 const path = require('path');
 const cors = require('cors');
@@ -6,6 +7,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const productController = require('./controllers/productController');
 const userController = require('./controllers/userController');
+const messageController = require('./controllers/messageController');
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -43,10 +45,45 @@ app.delete('/product/:id', productController.deleteProduct);
 app.post('/Liked-products', productController.getLikedProducts);
 app.post('/My-products', productController.getMyProducts);
 
+app.post('/messages', messageController.sendMessage);
+app.post('/messages/conversation', messageController.getConversation);
+app.post('/messages/conversations', messageController.getUserConversations);
+
 app.post('/signup', userController.signup);
 app.post('/login', userController.login);
 app.get('/get-user/:uId', userController.getUser);
 
-app.listen(port, () => {
+const httpServer = http.createServer(app);
+const io = require('socket.io')(httpServer, {
+  cors: { origin: '*' }
+});
+const connectedUsers = {};
+
+io.on('connection', (socket) => {
+  socket.on('register', (userId) => {
+    connectedUsers[userId] = socket.id;
+  });
+
+  socket.on('sendMessage', (data) => {
+    messageController.sendMessage({ body: data }, {
+      send: (response) => {
+        if (response.data && connectedUsers[data.receiverId]) {
+          io.to(connectedUsers[data.receiverId]).emit('receiveMessage', response.data);
+        }
+      },
+      status: () => ({ send: () => {} })
+    });
+  });
+
+  socket.on('disconnect', () => {
+    Object.keys(connectedUsers).forEach((userId) => {
+      if (connectedUsers[userId] === socket.id) {
+        delete connectedUsers[userId];
+      }
+    });
+  });
+});
+
+httpServer.listen(port, () => {
   console.log('server started on port ' + port);
 });

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Header from "./header";
 import '../App.css';
@@ -7,6 +7,7 @@ import { BASE_URL, PRODUCT_URL, USER_URL } from "../constants";
 
 function ProductDetail() {
     const { id } = useParams();
+    const navigate = useNavigate();
     const [product, setProduct] = useState(null);
     const [user, setUser] = useState(null);
 
@@ -52,6 +53,9 @@ const url = `${USER_URL}/${addedBy}`;
                             <Link className="form-link" to="/">Back to products</Link>
                             { product.addedBy && (
                                 <button onClick={() => handleContact(product.addedBy)}>SHOW CONTACT DETAILS </button>
+                            ) }
+                            { product.addedBy && (
+                                <button onClick={() => navigate(`/chat/${product.addedBy}`)}>Message Seller</button>
                             ) }
                             { user && user.username && <h4>{user.username}</h4> }
                         </div>

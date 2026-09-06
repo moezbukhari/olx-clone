@@ -13,3 +13,6 @@ export const LIKED_PRODUCTS_URL = BASE_URL + '/Liked-products';
 export const MY_PRODUCTS_URL = BASE_URL + '/My-products';
 export const PRODUCT_URL = BASE_URL + '/product';
 export const USER_URL = BASE_URL + '/get-user';
+export const MESSAGES_URL = BASE_URL + '/messages';
+export const CONVERSATION_URL = MESSAGES_URL + '/conversation';
+export const CONVERSATIONS_URL = MESSAGES_URL + '/conversations';

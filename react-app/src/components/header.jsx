@@ -195,6 +195,9 @@ function Header(props) {
                     {localStorage.getItem('token') && (
                         <Link className='header-btn' to='/liked-products'>FAVORITES</Link>
                     )}
+                    {localStorage.getItem('token') && (
+                        <Link className='header-btn' to='/chats'>Chats</Link>
+                    )}
                 </div>}
                 
             </div>

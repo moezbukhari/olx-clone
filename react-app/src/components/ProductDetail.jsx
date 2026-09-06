@@ -15,7 +15,8 @@ function ProductDetail() {
         const url = `${PRODUCT_URL}/${id}`;
         axios.get(url)
             .then((res) => {
-                setProduct(res.data.product);
+                const result = res.data.product;
+                setProduct(result);
             })
             .catch(() => {
                 alert('server error');
@@ -43,7 +44,7 @@ const url = `${USER_URL}/${addedBy}`;
                 {!product && <p className="detail-status">Loading product...</p>}
                 {product && (
                     <>
-                        <img className="detail-image" src={`${BASE_URL}/${product.pimage}`} alt={product.pname} />
+                        <img className="detail-image" src={`${BASE_URL}/${product.pimage.replace(/\\/g, '/')}`} alt={product.pname} />
                         <div className="detail-content">
                             <p className="detail-category">{product.category}</p>
                             <h1>{product.pname}</h1>

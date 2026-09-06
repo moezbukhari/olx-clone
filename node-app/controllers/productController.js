@@ -72,8 +72,8 @@ module.exports.addProduct = (req, res) => {
     price: req.body.price,
     pdesc: req.body.pdesc,
     category: req.body.category,
-    pimage: req.files.pimage && req.files.pimage.length > 0 ? req.files.pimage[0].path : '',
-    pimage2: req.files.pimage2 && req.files.pimage2.length > 0 ? req.files.pimage2[0].path : '',
+    pimage: req.files.pimage && req.files.pimage.length > 0 ? req.files.pimage[0].path.replace(/\\/g, '/') : '',
+    pimage2: req.files.pimage2 && req.files.pimage2.length > 0 ? req.files.pimage2[0].path.replace(/\\/g, '/') : '',
     location: req.body.location,
     addedBy: req.body.userId
   });

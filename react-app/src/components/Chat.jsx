@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { io } from "socket.io-client";
-import { BASE_URL, CONVERSATION_URL, MESSAGES_URL } from "../constants";
+import { BASE_URL, CONVERSATION_URL } from "../constants";
 import '../App.css';
 
 function Chat() {
@@ -47,13 +47,14 @@ function Chat() {
             receiverId: otherUserId,
             text: text.trim()
         };
+        if (!data.senderId || !data.receiverId) {
+            alert('Please login before sending a message.');
+            return;
+        }
+
         socketRef.current.emit('sendMessage', data);
-        axios.post(MESSAGES_URL, data)
-            .then((res) => {
-                setMessages((currentMessages) => [...currentMessages, res.data.data]);
-                setText('');
-            })
-            .catch(() => alert('server error'));
+        setMessages((currentMessages) => [...currentMessages, data]);
+        setText('');
     };
 
     return (

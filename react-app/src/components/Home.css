@@ -134,6 +134,47 @@
   -webkit-line-clamp: 2;
 }
 
+.product-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.product-actions button {
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--navy);
+  background: #f7faf9;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.product-actions button:last-child {
+  color: #b53f45;
+  background: #fff4f2;
+}
+
+.product-actions button:hover {
+  border-color: var(--navy);
+  background: var(--white);
+}
+
+.product-actions button:last-child:hover {
+  border-color: #b53f45;
+  background: #ffe8e5;
+}
+
+.edit-image-preview {
+  width: 100%;
+  max-height: 220px;
+  margin: 4px 0 8px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
 .icon-con {
   position: absolute;
   top: 13px;

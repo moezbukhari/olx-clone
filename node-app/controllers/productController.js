@@ -119,3 +119,41 @@ module.exports.getMyProducts = (req, res) => {
     .then((result) => res.send({ message: 'success', products: result }))
     .catch(() => res.status(400).send({ message: 'Unable to load my products.', products: [] }));
 };
+
+module.exports.updateProduct = (req, res) => {
+  const update = {
+    price: req.body.price,
+    pdesc: req.body.pdesc
+  };
+
+  if (req.files.pimage && req.files.pimage.length > 0) {
+    update.pimage = req.files.pimage[0].path;
+  }
+  if (req.files.pimage2 && req.files.pimage2.length > 0) {
+    update.pimage2 = req.files.pimage2[0].path;
+  }
+
+  Products.findOneAndUpdate(
+    { _id: req.params.id, addedBy: req.body.userId },
+    update,
+    { new: true }
+  )
+    .then((result) => {
+      if (!result) {
+        return res.status(404).send({ message: 'Product not found.' });
+      }
+      res.send({ message: 'Product updated successfully.', product: result });
+    })
+    .catch(() => res.status(400).send({ message: 'Unable to update product.' }));
+};
+
+module.exports.deleteProduct = (req, res) => {
+  Products.findOneAndDelete({ _id: req.params.id, addedBy: req.body.userId })
+    .then((result) => {
+      if (!result) {
+        return res.status(404).send({ message: 'Product not found.' });
+      }
+      res.send({ message: 'Product deleted successfully.' });
+    })
+    .catch(() => res.status(400).send({ message: 'Unable to delete product.' }));
+};

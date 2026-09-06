@@ -35,6 +35,11 @@ app.post('/add-product', upload.fields([
 ]), productController.addProduct);
 app.get('/get-products', productController.getProducts);
 app.get('/product/:id', productController.getProduct);
+app.put('/product/:id', upload.fields([
+  { name: 'pimage', maxCount: 1 },
+  { name: 'pimage2', maxCount: 1 }
+]), productController.updateProduct);
+app.delete('/product/:id', productController.deleteProduct);
 app.post('/Liked-products', productController.getLikedProducts);
 app.post('/My-products', productController.getMyProducts);
 

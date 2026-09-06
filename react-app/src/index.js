@@ -28,6 +28,7 @@ import LikedProducts from './components/LikedProducts';
 import MyProducts from './components/MyProducts';
 import MyProfile from './components/MyProfile';
 import CategoryPage from './components/CategoryPage';
+import EditProduct from './components/EditProduct';
 
 const router = createBrowserRouter([
   {
@@ -66,6 +67,10 @@ const router = createBrowserRouter([
   {
     path: "/my-products",
     element: (<MyProducts/>),
+  },
+  {
+    path: "/edit-product/:id",
+    element: (<EditProduct/>),
   },
   {
     path: "/my-profile",

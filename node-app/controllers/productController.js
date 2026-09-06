@@ -125,12 +125,13 @@ module.exports.updateProduct = (req, res) => {
     price: req.body.price,
     pdesc: req.body.pdesc
   };
+  const files = req.files || {};
 
-  if (req.files.pimage && req.files.pimage.length > 0) {
-    update.pimage = req.files.pimage[0].path;
+  if (files.pimage && files.pimage.length > 0) {
+    update.pimage = files.pimage[0].path;
   }
-  if (req.files.pimage2 && req.files.pimage2.length > 0) {
-    update.pimage2 = req.files.pimage2[0].path;
+  if (files.pimage2 && files.pimage2.length > 0) {
+    update.pimage2 = files.pimage2[0].path;
   }
 
   Products.findOneAndUpdate(
